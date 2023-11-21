@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body_content %}
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="text-white" style="font-size: 40px;">Top 50 Books</h1>
+        </div>
+
+        {% if data %}
+                {% for i in data %}
+                    <div class="col-3" style="margin-top: 50px;">
+                        <div class="card-body">
+                            <img class="card-img-top" src="{{i.image_url}}" alt="Image">
+                            <h3 class="text-white">{{i.title}}</h3>
+                            <h5 class="text-white">Rating - {{i.num_ratings}}</h5>
+                        </div>
+                    </div>
+                    {% endfor %}
+           {% endif %}
+
+    </div>
+</div>
+{% endblock %}
+    

@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body_content %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="text-white" style="font-size: 40px;"> Books Name</h1>
+            </div>
+
+            <form action="{% url 'collaborative-filter' %}" method="post">
+                {% csrf_token %}
+                <input name="user_input" type="text" class="form-control" placeholder="Name"><br>
+                <input type="submit" class="btn btn-lg btn-warning"  value="Submit">
+            </form>
+            {% if data %}
+                {% for i in data %}
+                    <div class="col-3" style="margin-top: 50px;">
+                        <div class="card-body">
+                            <!-- <img class="card-img-top" src="http://images.amazon.com/images/P/0439136350.01.MZZZZZZZ.jpg" alt="Image"> -->
+                            <img class="card-img-top" src="{{i.image_url}}" alt="Image">
+                            <h3 class="text-white">{{i.title}}</h3>
+                            <h5 class="text-white">{{i.author}}</h5>
+                            <h5 class="text-white">Votes - 300</h5>
+                            <h5 class="text-white">Rating - {{i.rating}}</h5>
+                        </div>
+                    </div>
+                    {% endfor %}
+            {% else %}
+                    <h3 class="text-white">No Data Found</h3>
+           {% endif %}
+
+        </div>
+
+    </div>
+
+{% endblock %}

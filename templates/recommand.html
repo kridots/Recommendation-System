@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body_content %}
+<div class="container">
+  <div class="row">
+      <div class="col-12">
+          <!-- <h1 class="text-white">Content-based</h1> -->
+          <h1 class="text-white">Movie Name</h1>
+          <form action="{% url 'content-recommand' %}" method="post">
+              {% csrf_token %}
+              <input name="user_input" type="text" class="form-control" placeholder="Name"><br>
+              <input type="submit" class="btn btn-lg btn-warning"  value="Submit">
+          </form>
+      </div>
+
+      {% if data %}
+          {% for i in data %}
+              <div class="col-md-10" style="margin-top: 50px;">
+                  
+                <h3 class="text-white" style="font-weight: 300px; font-size: 35px;"> {{i.title}}</h3>
+                <h3 class="text-white" style="font-size: 25px;">{{i.overview}}</h3>
+                
+                  <div class="content-text">
+                    {% for j in i.genres %}
+                      <h3 class="text-white features_new">
+                        {{j}}
+                      </h3>
+                    {% endfor %}
+                  </div>
+                <h3 class="text-white" style="font-size: larger;">Release Date: {{i.release_Date}}</h3>
+                <h3 class="text-white features_new_sample" > Lang: 
+                  {% for k in i.Spoken_Language %}
+                    {{k}},
+                  {% endfor %}
+                </h3>
+              </div>
+          {% endfor %}
+        {% else %}
+        <h3 class="text-white">No Data Found</h3>
+      {% endif %}
+      
+  </div>
+</div>    
+{% endblock %}
+
