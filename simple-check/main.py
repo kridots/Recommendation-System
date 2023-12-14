@@ -8,6 +8,34 @@ import nltk
 from sklearn.metrics.pairwise import cosine_similarity
 from nltk.stem.porter import PorterStemmer as ps
 import pickle
+import os
+
+class MakeDirectory:
+    def __init__(self):
+        try:
+            # Directory 
+            directory1 = "picklebooks"
+            directory2 = "picklemovie"
+            
+            # Parent Directory path 
+            parent_dir = "../"
+            # parent_dir = "../"
+            
+            # Path 
+            path1 = os.path.join(parent_dir, directory1) 
+            path2 = os.path.join(parent_dir, directory2) 
+            
+            # Create the directory 
+            # 'GeeksForGeeks' in 
+            # '/home / User / Documents' 
+            os.mkdir(path1)
+            os.mkdir(path2)
+            print("Directory '% s' created" % directory1)
+            print("Directory '% s' created" % directory2)
+        except Exception as e:
+            print("Error:>",e)
+
+MakeDirectory()
 
 class Movie_Recommend:
     def __init__(self):

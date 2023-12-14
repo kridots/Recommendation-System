@@ -10,20 +10,7 @@ local_settings.py
 db.sqlite3
 db.sqlite3-journal
 media
-picklebooks
-picklemovie
 
-
-# Pickle File
-*.pkl
-books.pkl
-popular.pkl
-pt.pkl
-ratingwithname.pkl
-similarity_book.pkl
-new_df.pkl
-new_movie_df.pkl
-similarity_scores.pkl
 
 # If your build process includes running collectstatic, then you probably don't need or want to include staticfiles/
 # in your Git repository. Update and uncomment the following line accordingly.
