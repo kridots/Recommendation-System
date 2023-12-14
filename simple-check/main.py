@@ -58,17 +58,17 @@ class Movie_Recommend:
     def pickle_create(self):
         try:
             pickle.dump(self.new_df, open('../picklemovie/new_df.pkl','wb'))
-            pickle.dump(self.similarity, open('../picklemovie/similarity_score.pkl','wb'))
+            pickle.dump(self.similarity, open('../picklemovie/similarity_scores.pkl','wb'))
             pickle.dump(self.new_movie_df, open('../picklemovie/new_movie_df.pkl','wb'))
 
         except Exception as e:
             print("Error:>",e)
 
 
-# movie_cheaker = Movie_Recommend()
-# movie_cheaker.data_prep()
-# # movie_cheaker.model_perform()
-# movie_cheaker.pickle_create()
+movie_cheaker = Movie_Recommend()
+movie_cheaker.data_prep()
+# movie_cheaker.model_perform()
+movie_cheaker.pickle_create()
 
 class Book_Recommand:
 
@@ -110,11 +110,11 @@ class Book_Recommand:
 
     def pickle_create(self):
         try:
-            pickle.dump(self.ratings_with_name, open('../picklebooks/ratingwithname.pkl','wb'))
             pickle.dump(self.popularity_df, open('../picklebooks/popular.pkl','wb'))
             pickle.dump(self.pt, open('../picklebooks/pt.pkl','wb'))
             pickle.dump(self.books, open('../picklebooks/books.pkl','wb'))
             pickle.dump(self.similarity_scores, open('../picklebooks/similarity_book.pkl','wb'))
+            pickle.dump(self.ratings_with_name, open('../picklebooks/ratingwithname.pkl','wb'))
 
         except Exception as e:
             print("Error:>",e)
