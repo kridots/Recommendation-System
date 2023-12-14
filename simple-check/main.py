@@ -115,7 +115,7 @@ class Book_Recommand:
             popularity_df = num_rating_df.merge(avg_rating_df, on='Book-Title')
             popularity_df = popularity_df[popularity_df['num_ratings'] >= 250].sort_values('avg_rating', ascending=False).head(50)
             self.popularity_df =  popularity_df.merge(self.books, on='Book-Title').drop_duplicates('Book-Title')[['Book-Title','Image-URL-M','num_ratings','avg_rating']]
-            print(self.popularity_df)
+            # print(self.popularity_df)
         except Exception as e:
             print("Book-Error:>",e)
 
