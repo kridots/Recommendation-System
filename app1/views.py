@@ -41,7 +41,12 @@ def content_recommand(request):
             # if user_input and any(new_df['title'] == user_input):
             #     return render(request, 'recommand.html')
             
-            movie_index = new_df[new_df['title'] == user_input].index[0]
+            # movie_index = new_df[new_df['title'] == user_input].index[0]
+            index = new_df[new_df['title'].str.contains(user_input,case=False)]
+            print('index',index)
+            if len(index)==0:
+                return render(request, 'recommand.html', {'data': new_list})
+            movie_index = index.index[0]
             distance = similarity_score[movie_index]
             movies_list = sorted(list(enumerate(distance)), reverse=True, key=lambda x: x[1])[1:6]
 
