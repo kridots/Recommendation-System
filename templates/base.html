@@ -60,37 +60,49 @@
     }
     .nav-item{
         display: flex;
-        padding-left: 40px;
+        padding: 1px 15px;
+        border-radius: 5px;
     }
     .card-img-top {
         width: 50%;
         height: 180px;
     }
+    .active { background-color: orange; }
 </style>
 
 <body style="background-color: black;">
     <nav class="navbar navbar-expand-lg navbar-light" style="background-color: teal;">
-        <a class="navbar-brand" href="/" style="color: white;">My Recommandation</a>
+        <a class="navbar-brand" href="/"  style="color: white;">My Recommandation</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
+                <li class="nav-item {% if request.path == '/recommand/' %}active{% endif %} ">
                     <a class="nav-link" href="{% url 'content-recommand' %}">Content-based</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item {% if request.path == '/collaborative/' %}active{% endif %}">
                     <a class="nav-link" href="{% url 'collaborative-filter' %}">Collaborative-based</a>
                 </li>
             </ul>
         </div>
     </nav>
-
     {% block body_content %}
 
     {% endblock %}
 </body>
+
+<script>
+    function buttonclicked(){
+       
+    }
+   let navbar = document.getElementsByClassName('nav-link')
+   
+   for (var i = 0 ; i < navbar.length; i++) {
+   navbar[i].addEventListener('click' , buttonclicked) ; 
+}
+    
+</script>
 
 </html>
