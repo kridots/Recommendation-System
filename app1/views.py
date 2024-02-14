@@ -2,6 +2,7 @@ from django.shortcuts import render, HttpResponse
 import numpy as np
 import pickle
 import json
+from django.contrib.auth.decorators import login_required
 
 # Movies Pickle
 new_df = pickle.load(open('picklemovie/new_df.pkl','rb'))
@@ -15,7 +16,9 @@ books = pickle.load(open('picklebooks/books.pkl','rb'))
 similarity_books = pickle.load(open('picklebooks/similarity_book.pkl','rb'))
 ratings_with_name = pickle.load(open('picklebooks/ratingwithname.pkl','rb'))    
 
+
 # Create your views here.
+@login_required(login_url="/accounts/login/")
 def index(request):
     new_list = []
 
@@ -30,7 +33,7 @@ def index(request):
     return render(request, 'index.html',{'data': new_list} )
     # return render(request, 'index.html', dict(movie_name = list(new_df['title'])[1:16]))
 
-
+@login_required(login_url="/accounts/login/")
 def content_recommand(request):
     try:
         if request.method == 'POST':
@@ -41,7 +44,12 @@ def content_recommand(request):
             # if user_input and any(new_df['title'] == user_input):
             #     return render(request, 'recommand.html')
             
-            movie_index = new_df[new_df['title'] == user_input].index[0]
+            # movie_index = new_df[new_df['title'] == user_input].index[0]
+            index = new_df[new_df['title'].str.contains(user_input,case=False)]
+            print('index',index)
+            if len(index)==0:
+                return render(request, 'recommand.html', {'data': new_list})
+            movie_index = index.index[0]
             distance = similarity_score[movie_index]
             movies_list = sorted(list(enumerate(distance)), reverse=True, key=lambda x: x[1])[1:6]
 
@@ -72,7 +80,7 @@ def content_recommand(request):
     return render(request,'recommand.html')
 
 
-
+@login_required(login_url="/accounts/login/")
 def collaborative_maker(request):
     new_list = []
     try:

@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'base/base.html' %}
 {% load static %}
 
 {% block body_content %}
@@ -6,7 +6,9 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <h1 class="text-white" style="font-size: 40px;"> Books Name</h1>
+                <h1 class="text-white" style="font-size: 40px;">Collaborative-Based</h1>
+                <br>
+                <h3 class="text-white"> Books Name: </h3> <h5 class="text-white">(for e.g., The Handmaid's Tale, Animal Farm, Midnight)</h5>
             </div>
 
             <form action="{% url 'collaborative-filter' %}" method="post">
@@ -27,8 +29,8 @@
                         </div>
                     </div>
                     {% endfor %}
-            {% else %}
-                    <h3 class="text-white">No Data Found</h3>
+            <!-- {% else %} -->
+                    <!-- <h3 class="text-white">No Data Found</h3> -->
            {% endif %}
 
         </div>
